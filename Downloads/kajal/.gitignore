@@ -1,0 +1,34 @@
+# Environment files — NEVER commit these (keys baked into RunPod pod env vars via dashboard)
+.env
+**/.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Model weights — too large for git, baked into Docker image
+model_cache/
+whisper_cache/
+*.bin
+*.safetensors
+*.gguf
+*.pt
+*.pth
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
