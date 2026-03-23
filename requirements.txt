@@ -1,0 +1,21 @@
+# Core
+torch>=2.2.1
+torchvision
+torchaudio
+fastapi
+uvicorn
+python-multipart
+requests
+numpy
+opencv-python
+
+# Svara-TTS & Indic NLP
+nemo_toolkit[all]
+pynini==2.1.5
+indic-nlp-library
+sentencepiece
+Cython
+
+# Video Utilities
+ffmpeg-python
+whisper-timestamped
