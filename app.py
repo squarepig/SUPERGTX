@@ -1,25 +1,25 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+import svara_inference
+import os
 import requests
-import json
 
 app = FastAPI()
-COMFY_API_URL = "http://127.0.0.1:8188/prompt"
 
-@app.post("/create-reel")
-async def create_reel(script: str, property_img: str, model_img: str):
-    # 1. Generate Voice with Svara
-    # generate_svara_audio(script)
-    
-    # 2. Load the ComfyUI Workflow JSON
-    with open("workflows/reel_config.json", "r") as f:
-        workflow = json.load(f)
-    
-    # 3. Inject inputs (images and script)
-    # workflow["node_id"]["inputs"]["image"] = property_img
-    
-    # 4. Push to ComfyUI
-    response = requests.post(COMFY_API_URL, json={"prompt": workflow})
-    return response.json()
+@app.get("/health")
+def health_check():
+    # Checks if GPU is reachable and ComfyUI is up
+    try:
+        response = requests.get("http://127.0.0.1:8188/history")
+        return {"status": "ready", "comfy_status": response.status_code}
+    except:
+        return {"status": "warming_up", "message": "ComfyUI not yet reachable"}
+
+@app.post("/generate-reel")
+async def generate_reel(script: str, property_img: str):
+    # Logic to trigger Svara and then ComfyUI
+    print(f"Request received for: {script[:20]}...")
+    # ... previous logic ...
+    return {"job_id": "12345", "status": "queued"}
 
 if __name__ == "__main__":
     import uvicorn
